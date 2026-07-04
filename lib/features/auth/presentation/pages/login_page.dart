@@ -1,4 +1,5 @@
 import 'package:covoisenegal/features/auth/presentation/pages/forgot_password.dart';
+import 'package:covoisenegal/features/auth/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:covoisenegal/features/auth/presentation/pages/widgets/login_header.dart';
 
@@ -91,12 +92,12 @@ class _LoginPageState extends State<LoginPage> {
                     AppButton(
                       text: "Se connecter",
                       onTap: () {
-                        final data = {
-                          "identifier": usernameController.text.trim(),
-                          "password": passwordController.text.trim(),
-                        };
-
-                        print(data);
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                        );
                       },
                     ),
 
