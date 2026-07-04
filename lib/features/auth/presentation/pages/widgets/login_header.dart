@@ -1,4 +1,3 @@
-import 'package:covoisenegal/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class LoginHeader extends StatelessWidget {
@@ -8,55 +7,65 @@ class LoginHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 260,
-
       child: Stack(
         children: [
-          Positioned(
-            left: -120,
-
-            top: -170,
-
-            child: Transform.rotate(
-              angle: -.4,
-
-              child: Container(
-                width: 420,
-
-                height: 320,
-
-                decoration: BoxDecoration(
-                  color: AppColors.primary,
-
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              ),
+          /// BACKGROUND GREEN SHAPE (plus large + diagonale propre)
+          ClipPath(
+            clipper: HeaderClipper(),
+            child: Container(
+              height: 200,
+              decoration: const BoxDecoration(color: Color(0xff2E7D32)),
             ),
           ),
 
-          const Align(
-            alignment: Alignment.bottomCenter,
-
+          /// CENTER CONTENT
+          Align(
+            alignment: Alignment.center,
             child: Column(
               mainAxisSize: MainAxisSize.min,
-
               children: [
-                Text("🇸🇳", style: TextStyle(fontSize: 45)),
+                /// FLAG
+                Image.asset("assets/images/drapeauSenegal.png", width: 60),
 
-                SizedBox(height: 10),
+                const SizedBox(height: 25),
 
-                Text(
-                  "COVOITSENEGAL",
-
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                /// TITLE
+                RichText(
+                  text: const TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "COVOIT",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 243, 252, 244),
+                          fontSize: 32,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      TextSpan(
+                        text: "SENEGAL",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 32,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
 
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
 
-                SizedBox(
-                  width: 140,
-
-                  child: Divider(thickness: 5, color: AppColors.primary),
+                /// GREEN LINE
+                Container(
+                  width: 80,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: const Color(0xff2E7D32),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                 ),
+
+                const SizedBox(height: 10),
               ],
             ),
           ),
@@ -64,4 +73,25 @@ class LoginHeader extends StatelessWidget {
       ),
     );
   }
+}
+
+class HeaderClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+
+    path.lineTo(0, size.height - 50);
+    path.quadraticBezierTo(
+      size.width / 2,
+      size.height,
+      size.width,
+      size.height - 50,
+    );
+    path.lineTo(size.width, 0);
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
