@@ -1,3 +1,4 @@
+import 'package:covoisenegal/features/auth/presentation/pages/forgot_password.dart';
 import 'package:flutter/material.dart';
 import 'package:covoisenegal/features/auth/presentation/pages/widgets/login_header.dart';
 
@@ -66,7 +67,14 @@ class _LoginPageState extends State<LoginPage> {
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ForgotPasswordPage(),
+                            ),
+                          );
+                        },
                         child: const Text(
                           "Mot de passe oublié ?",
                           style: TextStyle(
